@@ -39,6 +39,7 @@ class MNISTloader(torch.utils.data.Dataset):
                     transforms.Normalize(mean=self.mean, std=self.std),
                 ])
 
+
     def get_loader(self, train, download, kwargs):
         if train:
             batch_size = self.batch_size
