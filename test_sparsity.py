@@ -16,8 +16,6 @@ def main():
     size = args.size
     n_iter = args.iterations
     sparsities = args.sparsities
-    if args.sparsities == None:
-        args.sparsities = [0, 0.3, 0.5, 0.7, 0.8, 0.9, .95, .98, .99, .999]
     sparsities.sort()
     verbose = args.verbose
     
