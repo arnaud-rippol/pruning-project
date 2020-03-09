@@ -12,18 +12,18 @@ def make_matrix(size, sparsity):
 
 
 def main():
-
-    size = args.size
-    n_iter = args.iterations
-    sparsities = args.sparsities
-    sparsities.sort()
-    verbose = args.verbose
     
     args = parse_args_sparsity()
     print('------ Parameters for test_sparsity ------')
     for parameter, value in args.__dict__.items():
         print(f'{parameter}: {value}')
     print('------------------------------------------')
+
+    size = args.size
+    n_iter = args.iterations
+    sparsities = args.sparsities
+    sparsities.sort()
+    verbose = args.verbose
 
     dense = []
     sparses = []
