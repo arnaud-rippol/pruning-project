@@ -14,7 +14,7 @@ def parse_args_sparsity():
     parser.add_argument('--iterations', default=10, type=int,
                         help='number of iterations for each sparsity level')
 
-    parser.add_argument('--sparsities', default=[.95, .98, .99, .995, .997, .999], type=float,
+    parser.add_argument('--sparsities', default=[0, 0.3, 0.5, 0.7, 0.8, 0.9, .95, .98, .99, .999], type=float,
                         nargs="*", help='the levels of sparsities to test')
 
     parser.add_argument('--verbose', default=False, type=bool,
