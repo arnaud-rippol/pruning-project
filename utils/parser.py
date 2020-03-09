@@ -24,3 +24,73 @@ def parse_args_sparsity():
                         help='show the plot of the sparsity_test')
 
     return parser.parse_args()
+
+def parse_args_test_norm_pruning():
+
+    parser = argparse.ArgumentParser(description='Argument parser for test_norm_pruning.py')
+
+    parser.add_argument('--model', default='lenet', type=str,
+                        help='the model network to be used')
+
+    parser.add_argument('--model_path', default=None, type=str,
+                        help='the path to the model, if saved')                        
+
+    parser.add_argument('--dataset', default='mnist', type=str,
+                        help='the name of dataset to use for training')
+
+    parser.add_argument('--verbose', default=False, type=bool,
+                        help='print the progress of the sparsity_test')
+
+    parser.add_argument('--show_plot', default=True, type=bool,
+                        help='show the plot of the sparsity_test')
+
+    parser.add_argument('--n_epochs', default=2, type=int,
+                        help='number of epochs for the training')
+    
+    parser.add_argument('--download', default=True, type=bool,
+                        help='download the data from the torch dataset')
+
+    parser.add_argument('--data_dir', default='../data', type=str,
+                        help='The directory of the data. Leave "../data" in case data needs to be downloaded')
+
+    parser.add_argument('--batch_size', default=50, type=int,
+                        help='size of the training batch')
+
+    parser.add_argument('--test_batch_size', default=1, type=int,
+                        help='size of the testing batch')
+
+    parser.add_argument('--crop_size', default=None, type=int,
+                        help='the size to crop the data')
+
+    parser.add_argument('--custom_transforms', default=None, type=str,
+                        nargs="*", help='custom transforms to apply to the dataset')
+
+    parser.add_argument('--use_cuda', default=True, type=bool,
+                        help='use GPU when available')
+
+    parser.add_argument('--save_model', default=True, type=bool,
+                        help='save all the epochs of the model to a directory. \
+                            To save in a custom directory, use "--save_to".')
+
+    parser.add_argument('--save_to', default=None, type=str,
+                        help='the directory in which save the trained model.')
+    
+    parser.add_argument('--lr', default=0.1, type=float,
+                        help='the learning rate to train the model.')
+
+    parser.add_argument('--optimizer', default='sgd', type=str,
+                        help='the optimizer to train the model.')
+
+    parser.add_argument('--loss', default='mse', type=str,
+                        help='the loss to train the model.')
+    
+    parser.add_argument('--pruning_rates', default=[0.3], type=float,
+                        nargs="*", help='the levels of pruning to test')
+    
+    parser.add_argument('--pruning_methods', default=["random", "l1_unstructured","l1_structured", "l2_structured"], 
+                        type=str, nargs="*", help='the pruning methods, to chose among "random", "l1_unstructured", \
+                            "l1_structured" and "l2_structured")')
+
+
+    return parser.parse_args()
+

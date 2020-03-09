@@ -7,12 +7,10 @@ from torchvision import transforms, datasets
 
 class MNISTloader(torch.utils.data.Dataset):
 
-    def __init__(self, data_dir='../data', batch_size=50, test_batch_size=1, custom_transforms=None, list_dir=None,
-                 out_name=False, phase=None, crop_size=None):
+    def __init__(self, data_dir, batch_size, test_batch_size, custom_transforms, crop_size):
         
         self.data_dir = data_dir
         self.crop_size = crop_size
-        self.out_name = out_name
 
         self.mean = (0.1307,)
         self.std = (0.3081,)
@@ -48,8 +46,8 @@ class MNISTloader(torch.utils.data.Dataset):
             batch_size = self.test_batch_size
             shuffle = False
 
-        train_loader = torch.utils.data.DataLoader(
-            datasets.MNIST('../data', train=train, download=download, transform=self.transforms,
-                            batch_size=batch_size, shuffle=shuffle, **kwargs))
+        loader = torch.utils.data.DataLoader(
+            datasets.MNIST(self.data_dir, train=train, download=download, transform=self.transforms),
+                            batch_size=batch_size, shuffle=shuffle, **kwargs)
 
-        return train_loader
+        return loader
