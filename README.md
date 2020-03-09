@@ -1,4 +1,4 @@
-# MAP583 Pruning Project
+# MAP583 Compressing Neural Networks
 ### Authors: Arnaud Rippol, Tarek Ayed, Florian Abeillon, Alban Jourdain, Zhuoan Ma
 
 
