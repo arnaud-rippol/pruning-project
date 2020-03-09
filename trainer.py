@@ -13,7 +13,7 @@ from utils.utils import get_optimizer
 from utils.utils import get_loss
 
 
-def train(model, dataloader, device, optimizer_name, loss_name, lr):
+def train(model, dataloader, device, optimizer_name, loss_name, lr, verbose):
     optimizer_object = get_optimizer(optimizer_name)
     optimizer = optimizer_object(model.parameters(), lr=lr)
 
@@ -35,26 +35,26 @@ def train(model, dataloader, device, optimizer_name, loss_name, lr):
         classes = classes.to(device)
 
         outputs = model(inputs)
-        loss = loss_fn()(outputs, classes) # LeCun & al. used Maximum Log Likehood
+        loss = loss_fn()(outputs, classes) 
 
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
         _,preds = torch.max(outputs.data, 1)
-        # statistics
+
         running_loss += loss.item()
         running_corrects += torch.sum(preds == targets.data)
 
     loss = running_loss / 60000
     acc = running_corrects.data.item() / 60000
-    print('Training results: Loss: {:.4f} Acc: {:.4f}'.format(
-                loss, acc))
+    if verbose:
+        print(f'Training results: Loss: {loss:.4f} Acc: {acc:.4f}')
 
     return acc
 
 
-def eval(model, dataloader, device):
+def eval(model, dataloader, device, verbose):
     model.eval()
 
     running_corrects = 0
@@ -66,11 +66,12 @@ def eval(model, dataloader, device):
         outputs = model(inputs)
 
         _,preds = torch.max(outputs.data, 1)
-        # statistics
+
         running_corrects += torch.sum(preds == targets.data)
 
     acc = running_corrects.data.item() / 10000
-  
+    if verbose:
+        print(f'Testing results: Acc: {acc:.4f}')
     return acc
 
 
@@ -107,8 +108,9 @@ def train_model(args):
     for epoch in range(1, args.n_epochs + 1):
         if args.verbose:
             print("Epoch n°", epoch, ":")
-        learning_curve[1, epoch - 1] = train(model, loader_train, device, args.optimizer, args.loss, args.lr)
-        learning_curve[2, epoch - 1] = eval(model, loader_eval, device)
+        learning_curve[1, epoch - 1] = train(model, loader_train, device, args.optimizer, args.loss, args.lr, 
+                                             args.verbose)
+        learning_curve[2, epoch - 1] = eval(model, loader_eval, device, args.verbose)
 
         if args.save_model:
             torch.save(model, f"{args.model}/epoch_{epoch}.pt")
