@@ -144,7 +144,7 @@ def automated_gradual_pruning(model, final_sparsity, train_loader, test_loader, 
 
     for epoch in range(1, n_epochs + 1):
         if verbose:
-            print(f"Retraining: epoch {epoch / {n_epochs}}")
+            print(f"Retraining: epoch {epoch} / {n_epochs}")
         if nb_of_pruning < pruning_epochs and (epoch - 1) % frequency == 0:
             nb_of_pruning += 1    
             new_sparsity = final_sparsity * (1 - (1 - nb_of_pruning / pruning_epochs) ** 3)

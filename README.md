@@ -1,4 +1,4 @@
-# MAP583 Pruning Course Project
+# MAP583 Pruning Project
 ### Authors: Arnaud Rippol, Tarek Ayed, Florian Abeillon, Alban Jourdain, Zhuoan Ma
 
 

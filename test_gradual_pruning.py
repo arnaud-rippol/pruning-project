@@ -68,10 +68,10 @@ def main():
     if args.verbose:
         print(f"Accuracy obtained with linear gradual pruning: {results_one_shot}") 
 
-    results_AGP = gradual_linear_pruning(model, args.final_sparsity, loader_train, loader_eval, args.n_epochs_retrain,
-                                         args.pruning_epochs, args.pruning_frequency, device, args.optimizer,
-                                         args.loss, args.lr, args.verbose, baseline_accuracy, args.save_to, 
-                                         args.show_plot, args.pruning_method)
+    results_AGP = automated_gradual_pruning(model, args.final_sparsity, loader_train, loader_eval, args.n_epochs_retrain,
+                                            args.pruning_epochs, args.pruning_frequency, device, args.optimizer,
+                                            args.loss, args.lr, args.verbose, baseline_accuracy, args.save_to, 
+                                            args.show_plot, args.pruning_method)
     if args.verbose:
         print(f"Accuracy obtained with automated gradual pruning: {results_AGP}") 
 
