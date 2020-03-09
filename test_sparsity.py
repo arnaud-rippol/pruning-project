@@ -13,17 +13,19 @@ def make_matrix(size, sparsity):
 
 def main():
 
+    size = args.size
+    n_iter = args.iterations
+    sparsities = args.sparsities
+    if args.sparsities == None:
+        args.sparsities = [0, 0.3, 0.5, 0.7, 0.8, 0.9, .95, .98, .99, .999]
+    sparsities.sort()
+    verbose = args.verbose
+    
     args = parse_args_sparsity()
     print('------ Parameters for test_sparsity ------')
     for parameter, value in args.__dict__.items():
         print(f'{parameter}: {value}')
     print('------------------------------------------')
-
-    size = args.size
-    n_iter = args.iterations
-    sparsities = args.sparsities
-    sparsities.sort()
-    verbose = args.verbose
 
     dense = []
     sparses = []
@@ -52,7 +54,7 @@ def main():
             B = make_matrix(size, s)
             
             t = time.time()
-            A * B  # multiplication with scipy sparse matrices
+            A.multiply(B)  # multiplication with scipy sparse matrices
             dur_sparse += time.time() - t
                 
         if verbose:
@@ -63,8 +65,8 @@ def main():
     sparsities_percent = [100 * s for s in sparsities]
 
     if args.show_plot:
-        plt.plot(sparsities_percent, dense, label='Normal multiplication')
-        plt.plot(sparsities_percent, sparses, label='sparse matrices multiplication')
+        plt.plot(sparsities_percent, dense, label='Dense')
+        plt.plot(sparsities_percent, sparses, label='Sparse')
         plt.legend()
         plt.xlabel('Sparsity (%)')
         plt.ylabel(f'Time for {n_iter} multiplications (s)')
