@@ -22,7 +22,7 @@ Use ```test_norm_pruning.py --help``` to get more details about each argument.
 ```test_sparsity.py``` allows to test and visualize multiplication time of sparse and dense matrixes depending on sparsity rate. The point is to get a quantitative understanding of the potential impact of pruning on inference and backpropagation runtime.
 
 Here is a sample resulting plot with 10 iterations and default sparsity array:
-![alt text](https://github.com/arnaud-rippol/pruning-project/blob/master/figures/test_sparsity0.png "Logo Title Text 1")
+![alt text](https://github.com/arnaud-rippol/pruning-project/blob/master/figures/test_sparsity.png "Logo Title Text 1")
 
 Arguments: 
 ```test_sparsity.py --size [size of matrixes to generate] --iterations [number of iterations for each sparsity value] --sparsities [array of sparsities to test]```
